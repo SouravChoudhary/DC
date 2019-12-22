@@ -5,10 +5,10 @@
 int main(int argc, char* argv[]){
 	int rank,numprocs,tag=0,root=3,temp=1;
 	char msg[BUFFER_SIZE];
-	MPI_Init(&argc,&argv);
+	MPI_Init(&argc,&argv); // initialise mpi computation
 	MPI_Status status;
-	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
-	MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);  // determine process id no
+	MPI_Comm_size(MPI_COMM_WORLD,&numprocs);   // determine no of process
 	if(rank==3){
 		strcpy(msg,"Hello India");
 		for(temp=0;temp<numprocs;temp++){
@@ -21,5 +21,5 @@ int main(int argc, char* argv[]){
 		MPI_Recv(msg,BUFFER_SIZE,MPI_CHAR,root,tag,MPI_COMM_WORLD,&status);
 		printf("\n%s in process with rank %d from process with rank %d\n",msg,rank,root);
 	}
-	MPI_Finalize();
+	MPI_Finalize(); // terminte a  compuatation.
 }
